@@ -1,11 +1,11 @@
-import World from "./World";
+import WorldModel from "./WorldModel";
 import Snake from "./Snake";
 
 class SnakeController {
-  snakeWorld: World;
+  snakeWorld: WorldModel;
   slitherer: Snake;
 
-  public constructor(world: World, snake: Snake) {
+  public constructor(world: WorldModel, snake: Snake) {
     this.snakeWorld = world;
     this.slitherer = snake;
   }

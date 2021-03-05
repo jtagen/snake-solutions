@@ -1,5 +1,5 @@
 import Player from "./Player";
-import ScaneController from "./SnakeController";
+import SnakeController from "./SnakeController";
 import WorldModel from "./WorldModel";
 import display from "./display";
 
