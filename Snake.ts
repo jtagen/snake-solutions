@@ -1,28 +1,48 @@
 import display from "./display";
 
-// place your code on line 5 above the export statement below
+import Point from "./Point";
 
 class Snake {
-  private currentPosition: number;
-  private currentDirection: number;
+  currentPosition: Point;
+  currentDirection: number = 1; //{NORTH,EAST,SOUTH,WEST}
 
-  public constructor() {
-    this.currentPosition = 0;
-    this.currentDirection = 1;
+  constructor() {
+    this.currentPosition = new Point(0, 0);
+  }
+  /*
+  
+    move(steps: number) {
+    this.currentPosition += this.currentDirection * steps;
   }
 
-  public turn() {
-    if (this.currentDirection == 1) this.currentDirection = -1;
-    else this.currentDirection = 1;
-  }
-  public move(squares: number) {
-    if (this.currentDirection == 1)
-      this.currentPosition = this.currentPosition + squares;
-    else this.currentPosition = this.currentPosition - squares;
+    turn() {
+    this.currentDirection *= -1;
   }
 
-  public get position() {
+  get position() {
     return this.currentPosition;
   }
+
+*/
+  // turnLeft and turnRight
+  move(steps: number) {
+    let x = this.currentPosition.x;
+    let y = this.currentPosition.y;
+    if (this.currentDirection == 1) y += steps;
+    if (this.currentDirection == 2) x += steps;
+    if (this.currentDirection == 3) y -= steps;
+    if (this.currentDirection == 4) x += steps;
+    this.currentPosition = new Point(x, y);
+  }
+
+  turnLeft() {
+    this.currentDirection--;
+    if (this.currentDirection == 0) this.currentDirection = 4;
+  }
+  turnRight() {
+    this.currentDirection++;
+    if (this.currentDirection == 5) this.currentDirection = 1;
+  }
 }
+
 export default Snake;
