@@ -6,6 +6,8 @@ import display from "./display";
 import Snake from "./Snake";
 import SnakeTests from "./SnakeTests";
 import WorldModel from "./WorldModel";
+import SnakeController from "./SnakeController";
+import AvoidWallsPlayer from "./AvoidWallsPlayer";
 
 interface AppProps {}
 interface AppState {
@@ -38,33 +40,20 @@ render(<App />, document.getElementById("root"));
 After creating a new Snake, create a new WorldModel, passing this Snake to the constructor. Then call the WorldModel's update method.  Tell the Snake to turn.  Call the update method again.  See if the Snake's positions are what you expect them to be.
 */
 let snake = new Snake();
-let world = new WorldModel(snake);
-display(
-  "The snake is at position " +
-    world.Snake.currentPosition.x +
-    ", " +
-    world.Snake.currentPosition.y
-);
+let world = new WorldModel(snake, 10, 10);
+let sc = new SnakeController(world, snake);
+let player = new AvoidWallsPlayer(sc);
+let directions = ["", "Up", "Right", "Down", "Left"];
+for (let i = 0; i < 1000; i++) {
+  display(
+    "The snake is at position " +
+      world.Snake.currentPosition.x +
+      ", " +
+      world.Snake.currentPosition.y +
+      " and is facing " +
+      directions[world.Snake.currentDirection]
+  );
 
-world.update(1);
-
-display(
-  "The snake is at position " +
-    world.Snake.currentPosition.x +
-    ", " +
-    world.Snake.currentPosition.y
-);
-
-display("Direction: " + world.Snake.currentDirection);
-world.Snake.turnLeft();
-display("Direction: " + world.Snake.currentDirection);
-world.update(1);
-
-display(
-  "The snake is at position " +
-    world.Snake.currentPosition.x +
-    ", " +
-    world.Snake.currentPosition.y
-);
-
-// Add display statements below
+  player.makeTurn();
+  world.update(1);
+}

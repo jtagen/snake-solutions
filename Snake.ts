@@ -9,29 +9,14 @@ class Snake {
   constructor() {
     this.currentPosition = new Point(0, 0);
   }
-  /*
-  
-    move(steps: number) {
-    this.currentPosition += this.currentDirection * steps;
-  }
 
-    turn() {
-    this.currentDirection *= -1;
-  }
-
-  get position() {
-    return this.currentPosition;
-  }
-
-*/
-  // turnLeft and turnRight
   move(steps: number) {
     let x = this.currentPosition.x;
     let y = this.currentPosition.y;
-    if (this.currentDirection == 1) y += steps;
+    if (this.currentDirection == 1) y -= steps;
     if (this.currentDirection == 2) x += steps;
-    if (this.currentDirection == 3) y -= steps;
-    if (this.currentDirection == 4) x += steps;
+    if (this.currentDirection == 3) y += steps;
+    if (this.currentDirection == 4) x -= steps;
     this.currentPosition = new Point(x, y);
   }
 
