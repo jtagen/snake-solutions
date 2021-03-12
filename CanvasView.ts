@@ -1,5 +1,6 @@
 import View from "./View";
 import WorldModel from "./WorldModel";
+import Snake from "./Snake";
 class CanvasView implements View {
   scale: number;
   canvas: HTMLCanvasElement;
@@ -25,13 +26,12 @@ class CanvasView implements View {
 
     //show the Snake
     this.context.fillStyle = "red";
-    this.context.fillRect(
-      0,
-      0,
-       this.scale,
-       this.scale
-    );
 
+    for (let snake of world.allSnakes()) {
+      for (let pos of snake.parts) {
+        this.context.fillRect(pos.x*this.scale, pos.y * this.scale, this.scale, this.scale);
+      }
+    }
   }
 }
 
